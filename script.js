@@ -1,12 +1,13 @@
-//your JS code here. If required.
-const btn = document.getElementById('btn')
-const result = document.getElementById('weatherData')
-
-btn.addEventListener('click',()=>{
-	fetch("https://api.openweathermap.org/data/2.5/weather?q=london&appid=7d8db3a49de7c4affd734cb6dfcab991")
-	.then(data=>data.json())
-	.then(response=>{
-	result.innerText = `Current weather in London: ${response.weather[0].main}`
+document.getElementById('weatherButton').addEventListener('click', function() {
+  // Send a GET request to the OpenWeatherMap API
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=London&appid=999b280e8a2bab87c04ce16c25e1420c')
+	.then(response => response.json())
+	.then(data => {
+	  // Extract and format the weather data
+	  var weatherDescription = data.weather[0].description;
+	  var message = 'Current weather in London: '+weatherDescription;
+	  // Update the weatherData div with the weather information
+	  document.getElementById('weatherData').textContent = message;
 	})
-	.catch(err=>console.log(err))
-} )
+	.catch(error => console.log(error)); // Handle any errors that occur during the fetch request
+});
